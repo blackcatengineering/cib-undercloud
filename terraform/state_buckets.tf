@@ -11,7 +11,7 @@
 # (container_read = ".r:*,.rlistings") while holding passwords and EC2 secrets.
 
 module "state_bucket" {
-  source   = "git::https://github.com/blackcatengineering/cib-terraform-modules.git//modules/state-bucket?ref=v1.1.1"
+  source   = "git::https://github.com/blackcatengineering/cib-terraform-modules.git//modules/state-bucket?ref=v1.1.2"
   for_each = toset(["cib-undercloud-tfstate", "cib-tenants-tfstate"])
 
   name                    = each.key

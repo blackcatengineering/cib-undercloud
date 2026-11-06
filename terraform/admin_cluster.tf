@@ -13,7 +13,7 @@ locals {
 }
 
 module "admin_cluster" {
-  source = "git::https://github.com/blackcatengineering/cib-terraform-modules.git//modules/k8s-cluster?ref=v1.1.1"
+  source = "git::https://github.com/blackcatengineering/cib-terraform-modules.git//modules/k8s-cluster?ref=v1.1.2"
   count  = var.admin_cluster != null ? 1 : 0
 
   name               = "cib-platform"

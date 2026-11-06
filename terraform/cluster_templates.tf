@@ -21,10 +21,13 @@ resource "openstack_containerinfra_clustertemplate_v1" "k8s" {
   # Labels: https://docs.openstack.org/magnum/latest/user/#cluster-drivers
   # Amphora takes ROUND_ROBIN and health monitors; OVN supports only
   # SOURCE_IP_PORT and no health monitors.
-  labels = {
-    octavia_provider       = each.value.octavia_provider
-    octavia_lb_algorithm   = each.value.octavia_provider == "ovn" ? "SOURCE_IP_PORT" : "ROUND_ROBIN"
-    octavia_lb_healthcheck = each.value.octavia_provider == "amphora"
-    auto_scaling_enabled   = false
-  }
+  labels = merge(
+    {
+      octavia_provider       = each.value.octavia_provider
+      octavia_lb_algorithm   = each.value.octavia_provider == "ovn" ? "SOURCE_IP_PORT" : "ROUND_ROBIN"
+      octavia_lb_healthcheck = tostring(each.value.octavia_provider == "amphora")
+      auto_scaling_enabled   = "false"
+    },
+    each.value.capi_helm_chart_version != null ? { capi_helm_chart_version = each.value.capi_helm_chart_version } : {},
+  )
 }

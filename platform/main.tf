@@ -44,7 +44,7 @@ provider "helm" {
 
 # Shared building blocks: the same modules tenants use.
 module "addons" {
-  source = "git::https://github.com/blackcatengineering/cib-terraform-modules.git//modules/platform-addons?ref=v1.1.1"
+  source = "git::https://github.com/blackcatengineering/cib-terraform-modules.git//modules/platform-addons?ref=v1.1.2"
 
   # Magnum's Cinder CSI add-on already creates the StorageClasses
   # (standard, multiattach, default, csi-cinder-sc-delete/-retain), managed

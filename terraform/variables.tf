@@ -118,6 +118,12 @@ variable "k8s_templates" {
     # ranges, TLS/L7 and health monitors. ovn: no VMs and instant, but none
     # of those, and only the SOURCE_IP_PORT algorithm.
     octavia_provider = optional(string, "amphora")
+    # Canonical's openstack-ck8s-cluster chart version for clusters built from
+    # this template (Magnum label capi_helm_chart_version). null = Sunbeam's
+    # default (default_helm_chart_version in magnum.conf; 0.1.0 on 2026.1).
+    # Applies to new clusters; Magnum won't change a template that clusters
+    # use, so delete those clusters first.
+    capi_helm_chart_version = optional(string)
   }))
 
   validation {
